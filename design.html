@@ -60,7 +60,59 @@
             <div class="container px-0 px-lg-0">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-						<p>content goes here...</p>
+						<p>
+                            This section will involve all the technical details and design choices of this project. To not make it long and boring (and difficult to read), we will start with a system overview, and later dive deep into each components. 
+                        </p>
+
+                        <h3 class="section-heading">System Overview</h3>
+                        <center><img class="img-fluid" src="assets/img/digital-otamatone.png" width = 800 alt="..." /></center>
+                        <span class="caption text-muted"> System block diagram </span>
+
+                        <p>
+                            The central controller of this system is the Raspberry Pi 4. The Raspberry Pi 4 is connected to the <a href="https://www.adafruit.com/product/2298" class="link-primary">piTFT display</a>, which is the only peripharal that interacts with the user. The pitch coming out of the original Otamatone system (PCB + speaker) is determined by the resistance between two sensing terminals coming out from the PCB. In order to vary this resistance (thus controlling the pitch), the RPi controls a digitpot array via I2C, and several relays via GPIO. The Analog circuitry will be discussed in detail later.
+                        </p>
+
+                        <p>
+                            Since there is no direct correspondence between {digitpot + relay programming settings} and {frequency coming out of the speaker}, we must be able to somehow obtain this mapping. To measure the frequency coming out of the speaker, an <a href="https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense" class="link-primary">Arduino Nano BLE 33 Sense</a> is used for continuously measuring driving signals for the speaker and sending the base frequency over to the RPi via UART. This will also be discussed in detail later.
+                        </p>
+
+                        <center><img class="img-fluid" src="assets/img/system-pic.jpeg" width = 800 alt="..." /></center>
+                        <span class="caption text-muted"> System diagram bird's-eye view </span>
+
+                        <h3 class="section-heading">PiTFT for Touchscreen I/O</h3>
+                        <p>
+                            We used Adafruit's PiTFT plus assembled touchscreen for display output and touchscreen input. The user can choose different functions (e.g. Demo song, Calibration, Keyboard Mode, Quit) from the touchscreen and control how they want to interact with the system. The PiTFT uses the SPI interface and two GPIO pins (#24 #25) to communicate with the RPi. 
+                        </p>
+
+                        <p>
+                            Testing with the piTFT was straight-forward. We used the ball collision and also some button scripts from previous labs of this course to test the piTFT, which tests the display and touchscreen function. We had a few issues when working with the piTFT display. Initially, we did a <code>sudo apt-get upgrade</code> in order to install the CircuitPython library that is needed for the digitpots' driver, which overwrote the wheezy downgrade that was needed for the piTFT to function. We solved it by re-applying the wheezy downgrade patch. The error was discovered by printing out piTFT touch positions and found out they were incorrect.
+                        </p>
+
+                        <p>
+                            Another issue was that the piTFT suddenly stopped working before our demo. This was solved after we switched to a new Pi + piTFT system, showing that it's likely a hardware issue. 
+                        </p>
+
+                        <center><img class="img-fluid" src="assets/img/piTFT.png" width = 800 alt="..." /></center>
+                        <span class="caption text-muted"> piTFT user interface </span>
+
+                        <h3 class="section-heading">Analog Circuit</h3>
+                        <p>
+                            The analog circuitry is the most important part of this system. It bridges between the digital (RPi) and the analog (Otamatone) world. On a high level, the analog circuit takes some digital signals from the RPi (I2C + GPIO), and changes the effective resistance over the two sensing terminals coming out of the original Otamatone PCB. From the RPi's view, it can change the frequency coming out of the speaker by programming these peripharals via I2C and GPIO. 
+                        </p>
+
+                        <center><img class="img-fluid" src="assets/img/circuitdiagram.png" width = 800 alt="..." /></center>
+                        <span class="caption text-muted"> Analog circuit diagram. dDigital potentiometers are controlled by RPi via I2C. Relays are controlled by RPi via GPIO. These connections are not shown.</span>
+
+                        <h3 class="section-heading">Getting the Base Frequency and Calibration</h3>
+                        <p>
+
+                        </p>
+
+                        <h3 class="section-heading">Software Overview</h3>
+                        <p>
+
+                        </p>
+
                     </div>
                 </div>
             </div>
