@@ -79,6 +79,27 @@
                         <img class="img-fluid" src="assets/img/system-pic.jpeg" width = 800 alt="..." />
                         <span class="caption text-muted"> System diagram bird's-eye view </span>
 
+                        <h3 class="section-heading">Otamatone Characterization</h3>
+                        <p>
+                            In the beginning of the project, we did some preliminary characterizations to the original Otamatone.
+                        </p>
+
+                        <ul class="list-unstyled">
+                            <ul>
+                                <li>Inspect the waveform of the Otamatone speaker</li>
+                                <li>Inspect the waveform across two sensing terminals</li>
+                                <li>Measure the resistance range of the original softpot potentiometer</li>
+                                <li>Analysis of power terminals in the original PCB and manually solder terminals from the battery holder</li>
+                            </ul>
+                        </ul>
+                        <p>In addition, we performed some initial testing with the relays and the digital potentiometers when those parts arrived.</p>
+
+                        <img class="img-fluid" src="assets/img/waveform.png" width = 800 alt="..." />
+                        <span class="caption text-muted"> Waveform of original Otamatone speaker </span>
+
+                        <img class="img-fluid" src="assets/img/waveform2.png" width = 800 alt="..." />
+                        <span class="caption text-muted"> Waveform across two sensing terminals </span>
+
                         <h3 class="section-heading">PiTFT for Touchscreen I/O</h3>
                         <p>
                             We used Adafruit's PiTFT plus assembled touchscreen for display output and touchscreen input. The user can choose different functions (e.g. Demo song, Calibration, Keyboard Mode, Quit) from the touchscreen and control how they want to interact with the system. The PiTFT uses the SPI interface and two GPIO pins (#24 #25) to communicate with the RPi. 
@@ -107,6 +128,10 @@
                             This circuit diagram shows how the relays and the digital potentiometers are connected together. For digital potentiometers, we used four <a href="https://learn.adafruit.com/ds3502-i2c-potentiometer" class="link-primary">Adafruit DS3502 I2C Digital 10K Potentiometer Breakout</a> because it is available and comes with decent driver code. For relays, we obtained a couple of 3.3V logic relays from Amazon and powered them with two AA batteries. Two resisters are used for offset because we're afraid that small resistance will lead to high current and damage the original PCB. The digital potentiometers together with relay-controlled resistors essentially enables varaible resistance control in the range of [20k, 140k] Ohms. This is roughly the range of the original softpot ribbon that comes with the Otamatone.
                         </p>
 
+                        <p>
+                            Initially, we also tried using the <a href="https://learn.adafruit.com/adafruit-ds1841-i2c-logarithmic-resistor" class="link-primary">Adafruit DS1841 digital potentiometer</a> because it has a log range rather than a linear range, and we thought that this should give us a larger range of resistance to work with. However, we noticed that the RL terminal of this chip is connected directly to ground, which should work for most applications but not our project because we have no idea what happens if there's a direct path to ground between two terminals. We tested these breakout boards in our circuit, and the pitch changes in an unpredictable manner, so we abandoned the use of this part.
+                        </p>
+
                         <h4 class="section-subheading">Why not use 40 kOhm and 80 kOhm for larger range?</h4>
 
                         <p>
@@ -130,6 +155,9 @@
                                 <li>Sweep 10 steps in the setting space. Pitch should transition monotonically.</li>
                             </ul>
                         </ul>
+
+                        <img class="img-fluid" src="assets/img/firstcircuit.png" width = 800 alt="..." />
+                        <span class="caption text-muted"> First version of analog circuit </span>
 
                         <h3 class="section-heading">Getting the Base Frequency and Calibration: How to Play a Note</h3>
                         <p>
