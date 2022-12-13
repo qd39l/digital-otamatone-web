@@ -181,6 +181,12 @@
                             These heuristics may not be the smartest, but they worked in our testing. Somethings the error is small and a human can easily go into the config file and fix the error, while the calibration program could run for 1-2 minutes (which seems to be slow). We believe this is a trade-off we'll need to do because we want to make this an embedded device, and we cannot assume the user is able to poke into the config file and fix things.
                         </p>
 
+                        <img class="img-fluid" src="assets/img/example-fft.png" width = 800 alt="..." />
+                        <span class="caption text-muted"> Frequency spectrum without HPS. x-axis is Hz </span>
+
+                        <img class="img-fluid" src="assets/img/example-fft-hps.png" width = 800 alt="..." />
+                        <span class="caption text-muted"> Frequency spectrum with HPS up to 6. x-axis is Hz </span>
+
                         <h3 class="section-heading">Software Overview</h3>
                         <p>
                             Last but not least the software part! We leveraged OOP scheme to increase code maintainability and reusability, which helped us a lot in our development (we typically resolve SW bugs within 5-10 minutes). We developed our software library as we build our hardware system, and we had scripts to test subsystems as we move forward. Sometimes we introduced bugs into the hardware system during re-assembly, but we were able to run some existing test scripts to quickly locate and resolve the problem.
