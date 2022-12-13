@@ -65,7 +65,7 @@
                         </p>
 
                         <h3 class="section-heading">System Overview</h3>
-                        <center><img class="img-fluid" src="assets/img/digital-otamatone.png" width = 800 alt="..." /></center>
+                        <img class="img-fluid" src="assets/img/digital-otamatone.png" width = 800 alt="..." />
                         <span class="caption text-muted"> System block diagram </span>
 
                         <p>
@@ -76,7 +76,7 @@
                             Since there is no direct correspondence between {digitpot + relay programming settings} and {frequency coming out of the speaker}, we must be able to somehow obtain this mapping. To measure the frequency coming out of the speaker, an <a href="https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense" class="link-primary">Arduino Nano BLE 33 Sense</a> is used for continuously measuring driving signals for the speaker and sending the base frequency over to the RPi via UART. This will also be discussed in detail later.
                         </p>
 
-                        <center><img class="img-fluid" src="assets/img/system-pic.jpeg" width = 800 alt="..." /></center>
+                        <img class="img-fluid" src="assets/img/system-pic.jpeg" width = 800 alt="..." />
                         <span class="caption text-muted"> System diagram bird's-eye view </span>
 
                         <h3 class="section-heading">PiTFT for Touchscreen I/O</h3>
@@ -92,7 +92,7 @@
                             Another issue was that the piTFT suddenly stopped working before our demo. This was solved after we switched to a new Pi + piTFT system, showing that it's likely a hardware issue. 
                         </p>
 
-                        <center><img class="img-fluid" src="assets/img/piTFT.png" width = 800 alt="..." /></center>
+                        <img class="img-fluid" src="assets/img/piTFT.png" width = 800 alt="..." />
                         <span class="caption text-muted"> piTFT user interface </span>
 
                         <h3 class="section-heading">Analog Circuit</h3>
@@ -100,11 +100,11 @@
                             The analog circuitry is the most important part of this system. It bridges between the digital (RPi) and the analog (Otamatone) world. On a high level, the analog circuit takes some digital signals from the RPi (I2C + GPIO), and changes the effective resistance over the two sensing terminals coming out of the original Otamatone PCB. From the RPi's view, it can change the frequency coming out of the speaker by programming these peripharals via I2C and GPIO. 
                         </p>
 
-                        <center><img class="img-fluid" src="assets/img/circuitdiagram.png" width = 800 alt="..." /></center>
+                        <img class="img-fluid" src="assets/img/circuitdiagram.png" width = 800 alt="..." />
                         <span class="caption text-muted"> Analog circuit diagram. Digital potentiometers are controlled by RPi via I2C. Relays are controlled by RPi via GPIO. These connections are not shown.</span>
 
                         <p>
-                            This circuit diagram shows how the relays and the digital potentiometers are connected together. For digital potentiometers, we used four <a href="https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense" class="link-primary">Adafruit DS3502 I2C Digital 10K Potentiometer Breakout</a> because it is available and comes with decent driver code. For relays, we obtained a couple of 3.3V logic relays from Amazon and powered them with two AA batteries. Two resisters are used for offset because we're afraid that small resistance will lead to high current and damage the original PCB. The digital potentiometers together with relay-controlled resistors essentially enables varaible resistance control in the range of [20k, 140k] Ohms. This is roughly the range of the original softpot ribbon that comes with the Otamatone.
+                            This circuit diagram shows how the relays and the digital potentiometers are connected together. For digital potentiometers, we used four <a href="https://learn.adafruit.com/ds3502-i2c-potentiometer" class="link-primary">Adafruit DS3502 I2C Digital 10K Potentiometer Breakout</a> because it is available and comes with decent driver code. For relays, we obtained a couple of 3.3V logic relays from Amazon and powered them with two AA batteries. Two resisters are used for offset because we're afraid that small resistance will lead to high current and damage the original PCB. The digital potentiometers together with relay-controlled resistors essentially enables varaible resistance control in the range of [20k, 140k] Ohms. This is roughly the range of the original softpot ribbon that comes with the Otamatone.
                         </p>
 
                         <h4 class="section-subheading">Why not use 40 kOhm and 80 kOhm for larger range?</h4>
